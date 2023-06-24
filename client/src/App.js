@@ -7,6 +7,7 @@ import Faculty from "./components/login/Faculty";
 import AdminHome from "./components/admin/AdminHome";
 import Profile from "./components/admin/profile/Profile";
 import AddStudent from "./components/admin/addStudent/AddStudent";
+import AllStudent from "./components/admin/getStudent/AllStudent";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -35,6 +36,10 @@ function App() {
             {
               path: "addstudent",
               element: <AddStudent />,
+            },
+            {
+              path: "allstudent",
+              element: <AllStudent />,
             },
           ],
         },

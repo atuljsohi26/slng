@@ -3,7 +3,7 @@ import { FaPlusCircle } from "react-icons/fa";
 
 const Body = () => {
   return (
-    <div className="flex-[0.8] mt-3">
+    <div className="flex-[0.8] mt-2">
       <div className="space-y-5">
         <div className="flex text-gray-400 items-center space-x-2">
           <FaPlusCircle />
@@ -50,38 +50,6 @@ const Body = () => {
                 </div>
                 <div className="grid grid-cols-2  gap-10">
                   <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
-                    Email :
-                  </h1>
-
-                  <input
-                    required
-                    placeholder="Email"
-                    className="border-2 px-2 py-1 text-sm"
-                    type="email"
-                    //value={value.email}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, email: e.target.value })
-                    // }
-                  />
-                </div>
-                <div className="grid grid-cols-2  gap-10">
-                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
-                    Batch :
-                  </h1>
-
-                  <input
-                    required
-                    placeholder="yyyy-yyyy"
-                    className="border-2 px-2 py-1 text-sm"
-                    type="text"
-                    //value={value.batch}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, batch: e.target.value })
-                    // }
-                  />
-                </div>
-                <div className="grid grid-cols-2  gap-10">
-                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
                     Father's Name :
                   </h1>
 
@@ -114,6 +82,38 @@ const Body = () => {
                 </div>
                 <div className="grid grid-cols-2  gap-10">
                   <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Email :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Email"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="email"
+                    //value={value.email}
+                    // onChange={(e) =>
+                    //   setValue({ ...value, email: e.target.value })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Batch :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="yyyy-yyyy"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="text"
+                    //value={value.batch}
+                    // onChange={(e) =>
+                    //   setValue({ ...value, batch: e.target.value })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
                     Year :
                   </h1>
                   <select
@@ -133,8 +133,6 @@ const Body = () => {
                     <option value="4">4</option>
                   </select>
                 </div>
-              </div>
-              <div className="flex flex-col space-y-10 pr-6">
                 <div className="grid grid-cols-2  gap-10">
                   <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
                     Department :
@@ -191,55 +189,17 @@ const Body = () => {
                 </div>
                 <div className="grid grid-cols-2  gap-10">
                   <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
-                    Contact Number :
+                    Student Mobile :
                   </h1>
 
                   <input
                     required
-                    placeholder="Contact Number"
+                    placeholder="Student Mobile"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
                     //value={value.contactNumber}
                     // onChange={(e) =>
                     //   setValue({ ...value, contactNumber: e.target.value })
-                    // }
-                  />
-                </div>
-                <div className="grid grid-cols-2  gap-10">
-                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
-                    Father's Contact Number :
-                  </h1>
-
-                  <input
-                    required
-                    placeholder="Father's Contact Number"
-                    className="border-2 px-2 py-1 text-sm"
-                    type="number"
-                    //value={value.fatherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     fatherContactNumber: e.target.value,
-                    //   })
-                    // }
-                  />
-                </div>
-                <div className="grid grid-cols-2  gap-10">
-                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
-                    Mother's Contact Number :
-                  </h1>
-
-                  <input
-                    required
-                    placeholder="Father's Contact Number"
-                    className="border-2 px-2 py-1 text-sm"
-                    type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
                     // }
                   />
                 </div>
@@ -274,6 +234,214 @@ const Body = () => {
                     multiple={false}
                     // onDone={({ base64 }) =>
                     //   setValue({ ...value, avatar: base64 })
+                    // }
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col space-y-10 pr-6">
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-1 py-1 rounded-lg">
+                    Father Occupation :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Father Occupation"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="text"
+                    //value={value.fatherName}
+                    // onChange={(e) =>
+                    //   setValue({ ...value, fatherName: e.target.value })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Father's Mobile :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Father's Mobile"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.fatherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     fatherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Mother's Mobile :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Father's Mobile"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Postal Address :
+                  </h1>
+                  <textarea
+                    required
+                    placeholder="Postal Address"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }>
+                  ></textarea>
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Permanent Address :
+                  </h1>
+                  <textarea
+                    required
+                    placeholder="Permanent Address"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }>
+                  ></textarea>
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Pincode :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Pincode"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Category :
+                  </h1>
+                  <select
+                    required
+                    displayEmpty
+                    sx={{ height: 36 }}
+                    inputProps={{ "aria-label": "Without label" }}
+                    //value={value.section}
+                    // onChange={(e) =>
+                    //   setValue({ ...value, section: e.target.value })
+                    // }
+                  >
+                    <option value="">None</option>
+                    <option value="general">General</option>
+                    <option value="sc">SC</option>
+                    <option value="st">ST</option>
+                    <option value="obc">OBC</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Aadhar No. :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Aadhar No."
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    PAN :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="PAN"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Nationality :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Nationality"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
+                    // }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    Blood Group :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="Blood Group"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    //value={value.motherContactNumber}
+                    // onChange={(e) =>
+                    //   setValue({
+                    //     ...value,
+                    //     motherContactNumber: e.target.value,
+                    //   })
                     // }
                   />
                 </div>
