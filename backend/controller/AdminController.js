@@ -2,6 +2,7 @@ const { createUserName, hashPassword } = require("../utils/helpers");
 const { MESSAGE } = require("../utils/site_config");
 const AdminModel = require("./../model/admin");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 module.exports.addAdmin = async (req, res) => {
   try {
@@ -52,6 +53,45 @@ module.exports.addAdmin = async (req, res) => {
       success: true,
       message: MESSAGE.ADMIN_ADD_SUCCESSFULLY,
       response: { newAdmin, jwtToken: token },
+    });
+  } catch (err) {
+    console.log("error **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};
+
+module.exports.login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const userExist = await AdminModel.findOne({ username });
+    if (!userExist) {
+      return res.status(400).json({
+        status: false,
+        message: MESSAGE.USER_NOT_EXIST,
+      });
+    }
+    const checkPassword = await bcrypt.compare(password, userExist.password);
+    if (!checkPassword) {
+      return res.status(400).json({
+        status: false,
+        message: MESSAGE.PASSWORD_NOT_MATCHED,
+      });
+    }
+    const token = jwt.sign(
+      {
+        email: userExist.email,
+        id: userExist._id,
+      },
+      "sEcReT",
+      { expiresIn: "1h" }
+    );
+    return res.status(200).json({
+      status: true,
+      message: MESSAGE.LOGIN_SUCCESS,
+      response: { userExist, jwtToken: token },
     });
   } catch (err) {
     console.log("error **", err);
