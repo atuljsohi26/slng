@@ -1,8 +1,10 @@
 import React from "react";
 import { FaUserLarge } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const AdminHeader = () => {
+  const userData = useSelector((state) => state.loginUser);
   return (
     <div className="flex-[0.05] flex justify-between items-center mx-5 my-2">
       <div className="flex items-center ">
@@ -21,7 +23,7 @@ const AdminHeader = () => {
           sx={{ width: 24, height: 24 }}
           className="border-blue-600 border-2"
         />
-        <h1>Admin</h1>
+        <h1>{userData.name}</h1>
         <MdLogout
           //onClick={logout}
           className="cursor-pointer hover:scale-125 transition-all "

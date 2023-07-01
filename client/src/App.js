@@ -1,3 +1,4 @@
+import { Provider } from "react-redux";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
@@ -8,6 +9,8 @@ import AdminHome from "./components/admin/AdminHome";
 import Profile from "./components/admin/profile/Profile";
 import AddStudent from "./components/admin/addStudent/AddStudent";
 import AllStudent from "./components/admin/getStudent/AllStudent";
+import store from "./redux/store";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -56,10 +59,13 @@ function App() {
   ]);
 
   return (
-    <div>
-      <Outlet />
-      <RouterProvider router={appRouter} />
-    </div>
+    <Provider store={store}>
+      <Toaster />
+      <div>
+        <Outlet />
+        <RouterProvider router={appRouter} />
+      </div>
+    </Provider>
   );
 }
 
