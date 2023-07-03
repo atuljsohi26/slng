@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  _id: "",
+  name: "",
+  email: "",
+  avatar: "",
+  token: "",
+};
+
 const adminUserSlice = createSlice({
   name: "adminUser",
-  initialState: {
-    loginUserDetails: null,
-  },
+  initialState,
   reducers: {
     loginUserDetails: (state, action) => {
       state._id = action.payload.userExist._id;

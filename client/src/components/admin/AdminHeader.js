@@ -4,7 +4,7 @@ import { MdLogout } from "react-icons/md";
 import { useSelector } from "react-redux";
 
 const AdminHeader = () => {
-  const userData = useSelector((state) => state.loginUser);
+  const userData = useSelector((state) => state.adminUser);
   return (
     <div className="flex-[0.05] flex justify-between items-center mx-5 my-2">
       <div className="flex items-center ">

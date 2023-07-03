@@ -1,10 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
-import adminUserSlice from "./adminUserSlice";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import adminUserSliceReducer from "./adminUserSlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
 
-const store = configureStore({
-  reducer: {
-    loginUser: adminUserSlice,
-  },
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const rootReducer = combineReducers({
+  adminUser: adminUserSliceReducer,
 });
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk],
+});
+
+export const persistor = persistStore(store);
