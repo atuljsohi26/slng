@@ -6,6 +6,7 @@ const initialState = {
   email: "",
   avatar: "",
   token: "",
+  isUserLogin: false,
 };
 
 const adminUserSlice = createSlice({
@@ -18,9 +19,17 @@ const adminUserSlice = createSlice({
       state.email = action.payload.userExist.email;
       state.avatar = action.payload.userExist.avatar;
       state.token = action.payload.jwtToken;
+      state.isUserLogin = true;
+    },
+    logoutUserDetais: (state) => {
+      state._id = "";
+      state.name = "";
+      state.email = "";
+      state.avatar = "";
+      state.token = "";
     },
   },
 });
 
-export const { loginUserDetails } = adminUserSlice.actions;
+export const { loginUserDetails, logoutUserDetais } = adminUserSlice.actions;
 export default adminUserSlice.reducer;

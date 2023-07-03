@@ -1,10 +1,18 @@
 import React from "react";
-import { FaUserLarge } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUserDetais } from "../../redux/adminUserSlice";
 
 const AdminHeader = () => {
   const userData = useSelector((state) => state.adminUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutUserDetais());
+    navigate("/admin");
+  };
   return (
     <div className="flex-[0.05] flex justify-between items-center mx-5 my-2">
       <div className="flex items-center ">
@@ -17,15 +25,14 @@ const AdminHeader = () => {
       </div>
       <h1 className="font-semibold text-black">Welcome</h1>
       <div className="flex items-center space-x-3">
-        <FaUserLarge
-          src=""
-          alt=""
-          sx={{ width: 24, height: 24 }}
-          className="border-blue-600 border-2"
+        <img
+          src={userData.avatar}
+          alt="user_img"
+          className="border-blue-600 border-2 w-14 h-14"
         />
         <h1>{userData.name}</h1>
         <MdLogout
-          //onClick={logout}
+          onClick={logout}
           className="cursor-pointer hover:scale-125 transition-all "
         />
       </div>

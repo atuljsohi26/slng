@@ -9,13 +9,11 @@ import AdminHome from "./components/admin/AdminHome";
 import Profile from "./components/admin/profile/Profile";
 import AddStudent from "./components/admin/addStudent/AddStudent";
 import AllStudent from "./components/admin/getStudent/AllStudent";
-//import store from "./redux/store";
 import { Toaster } from "react-hot-toast";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
-  //const loginUserData = useSelector((state) => state.loginUser);
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -60,7 +58,6 @@ function App() {
       ],
     },
   ]);
-  //const persistor = persistStore(store);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
