@@ -1,7 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
+import { imageToBase64 } from "../../../utils/helper";
 
 const Body = () => {
+  const [value, setValue] = useState({
+    name: "",
+    dob: "",
+    father_name: "",
+    mother_name: "",
+    email: "",
+    batch: "",
+    year: "",
+    department: "",
+    gender: "",
+    studnt_mobile: "",
+    section: "",
+    avatar: "",
+    father_occupation: "",
+    father_mobile: "",
+    mother_mobile: "",
+    address: "",
+    permanent_address: "",
+    pincode: "",
+    category: "",
+    aadhar_no: "",
+    pan_no: "",
+    nationality: "",
+    blood_group: "",
+    tenth_percent: "",
+    twelth_percent: "",
+  });
+
+  const handleUploadImage = async (e) => {
+    const data = await imageToBase64(e.target.files[0]);
+    setValue({
+      ...value,
+      avatar: data,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("studentValues **", value);
+  };
+
   return (
     <div className="flex-[0.8] mt-2">
       <div className="space-y-5">
@@ -12,7 +54,7 @@ const Body = () => {
         <div className=" mr-10 bg-white flex flex-col rounded-xl ">
           <form
             className={`flex flex-col mb-6 scrollbar-thin scrollbar-track-white scrollbar-thumb-black overflow-y-scroll h-[40rem]`}
-            //onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
           >
             <div className="flex py-10 ml-10 space-x-28">
               <div className="flex flex-col space-y-10">
@@ -26,10 +68,10 @@ const Body = () => {
                     required
                     className="border-2 px-2 py-1 text-sm"
                     type="text"
-                    //value={value.name}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, name: e.target.value })
-                    // }
+                    value={value.name}
+                    onChange={(e) =>
+                      setValue({ ...value, name: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -42,10 +84,10 @@ const Body = () => {
                     placeholder="DD/MM/YYYY"
                     className="border-2 px-2 py-1 text-sm"
                     type="date"
-                    //value={value.dob}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, dob: e.target.value })
-                    // }
+                    value={value.dob}
+                    onChange={(e) =>
+                      setValue({ ...value, dob: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -58,10 +100,10 @@ const Body = () => {
                     placeholder="Father's Name"
                     className="border-2 px-2 py-1 text-sm"
                     type="text"
-                    //value={value.fatherName}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, fatherName: e.target.value })
-                    // }
+                    value={value.father_name}
+                    onChange={(e) =>
+                      setValue({ ...value, father_name: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -74,10 +116,10 @@ const Body = () => {
                     placeholder="Mother's Name"
                     className="border-2 px-2 py-1 text-sm"
                     type="text"
-                    //value={value.motherName}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, motherName: e.target.value })
-                    // }
+                    value={value.mother_name}
+                    onChange={(e) =>
+                      setValue({ ...value, mother_name: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -90,10 +132,10 @@ const Body = () => {
                     placeholder="Email"
                     className="border-2 px-2 py-1 text-sm"
                     type="email"
-                    //value={value.email}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, email: e.target.value })
-                    // }
+                    value={value.email}
+                    onChange={(e) =>
+                      setValue({ ...value, email: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -106,10 +148,10 @@ const Body = () => {
                     placeholder="yyyy-yyyy"
                     className="border-2 px-2 py-1 text-sm"
                     type="text"
-                    //value={value.batch}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, batch: e.target.value })
-                    // }
+                    value={value.batch}
+                    onChange={(e) =>
+                      setValue({ ...value, batch: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -118,13 +160,13 @@ const Body = () => {
                   </h1>
                   <select
                     required
-                    displayEmpty
+                    displayempty="true"
                     sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    //value={value.year}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, year: e.target.value })
-                    // }
+                    inputprops={{ "aria-label": "Without label" }}
+                    value={value.year}
+                    onChange={(e) =>
+                      setValue({ ...value, year: e.target.value })
+                    }
                   >
                     <option value="">None</option>
                     <option value="1">1</option>
@@ -139,13 +181,13 @@ const Body = () => {
                   </h1>
                   <select
                     required
-                    displayEmpty
+                    displayempty="true"
                     sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    //value={value.department}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, department: e.target.value })
-                    // }
+                    inputprops={{ "aria-label": "Without label" }}
+                    value={value.department}
+                    onChange={(e) =>
+                      setValue({ ...value, department: e.target.value })
+                    }
                   >
                     <option value="">None</option>
                     {/* {departments.map((dp, idx) => (
@@ -154,16 +196,16 @@ const Body = () => {
                       </option>
                     ))} */}
                     <option key="d1" value="department 1">
-                      Department 1/
+                      Department 1
                     </option>
                     <option key="d2" value="department 2">
-                      Department 2/
+                      Department 2
                     </option>
                     <option key="d3" value="department 3">
-                      Department 3/
+                      Department 3
                     </option>
                     <option key="d4" value="department 4">
-                      Department 4/
+                      Department 4
                     </option>
                   </select>
                 </div>
@@ -173,13 +215,13 @@ const Body = () => {
                   </h1>
                   <select
                     required
-                    displayEmpty
+                    displayempty="true"
                     sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    //value={value.gender}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, gender: e.target.value })
-                    // }
+                    inputprops={{ "aria-label": "Without label" }}
+                    value={value.gender}
+                    onChange={(e) =>
+                      setValue({ ...value, gender: e.target.value })
+                    }
                   >
                     <option value="">None</option>
                     <option value="Male">Male</option>
@@ -197,10 +239,10 @@ const Body = () => {
                     placeholder="Student Mobile"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.contactNumber}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, contactNumber: e.target.value })
-                    // }
+                    value={value.studnt_mobile}
+                    onChange={(e) =>
+                      setValue({ ...value, studnt_mobile: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -209,13 +251,13 @@ const Body = () => {
                   </h1>
                   <select
                     required
-                    displayEmpty
+                    displayempty="true"
                     sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    //value={value.section}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, section: e.target.value })
-                    // }
+                    inputprops={{ "aria-label": "Without label" }}
+                    value={value.section}
+                    onChange={(e) =>
+                      setValue({ ...value, section: e.target.value })
+                    }
                   >
                     <option value="">None</option>
                     <option value="1">1</option>
@@ -230,15 +272,15 @@ const Body = () => {
                   </h1>
 
                   <input
-                    type="file"
-                    multiple={false}
-                    // onDone={({ base64 }) =>
-                    //   setValue({ ...value, avatar: base64 })
-                    // }
+                    type={"file"}
+                    id="profileImage"
+                    //className="hidden"
+                    accept="image/*"
+                    onChange={handleUploadImage}
                   />
                 </div>
               </div>
-              <div className="flex flex-col space-y-10 pr-6">
+              <div className="flex flex-col space-y-10 pr-7">
                 <div className="grid grid-cols-2  gap-10">
                   <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-1 py-1 rounded-lg">
                     Father Occupation :
@@ -249,10 +291,10 @@ const Body = () => {
                     placeholder="Father Occupation"
                     className="border-2 px-2 py-1 text-sm"
                     type="text"
-                    //value={value.fatherName}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, fatherName: e.target.value })
-                    // }
+                    value={value.father_occupation}
+                    onChange={(e) =>
+                      setValue({ ...value, father_occupation: e.target.value })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -265,13 +307,13 @@ const Body = () => {
                     placeholder="Father's Mobile"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.fatherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     fatherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.father_mobile}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        father_mobile: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -284,13 +326,13 @@ const Body = () => {
                     placeholder="Father's Mobile"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.mother_mobile}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        mother_mobile: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -302,13 +344,13 @@ const Body = () => {
                     placeholder="Postal Address"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }>
+                    value={value.address}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        address: e.target.value,
+                      })
+                    }
                   ></textarea>
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -320,13 +362,13 @@ const Body = () => {
                     placeholder="Permanent Address"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }>
+                    value={value.permanent_address}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        permanent_address: e.target.value,
+                      })
+                    }
                   ></textarea>
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -339,13 +381,13 @@ const Body = () => {
                     placeholder="Pincode"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.pincode}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        pincode: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -354,13 +396,13 @@ const Body = () => {
                   </h1>
                   <select
                     required
-                    displayEmpty
+                    displayempty="true"
                     sx={{ height: 36 }}
-                    inputProps={{ "aria-label": "Without label" }}
-                    //value={value.section}
-                    // onChange={(e) =>
-                    //   setValue({ ...value, section: e.target.value })
-                    // }
+                    inputprops={{ "aria-label": "Without label" }}
+                    value={value.category}
+                    onChange={(e) =>
+                      setValue({ ...value, category: e.target.value })
+                    }
                   >
                     <option value="">None</option>
                     <option value="general">General</option>
@@ -379,13 +421,13 @@ const Body = () => {
                     placeholder="Aadhar No."
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.aadhar_no}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        aadhar_no: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -398,13 +440,13 @@ const Body = () => {
                     placeholder="PAN"
                     className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.pan_no}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        pan_no: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -416,14 +458,14 @@ const Body = () => {
                     required
                     placeholder="Nationality"
                     className="border-2 px-2 py-1 text-sm"
-                    type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    type="text"
+                    value={value.nationality}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        nationality: e.target.value,
+                      })
+                    }
                   />
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -435,14 +477,52 @@ const Body = () => {
                     required
                     placeholder="Blood Group"
                     className="border-2 px-2 py-1 text-sm"
+                    type="text"
+                    value={value.blood_group}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        blood_group: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    10th % :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="10 %"
+                    className="border-2 px-2 py-1 text-sm"
                     type="number"
-                    //value={value.motherContactNumber}
-                    // onChange={(e) =>
-                    //   setValue({
-                    //     ...value,
-                    //     motherContactNumber: e.target.value,
-                    //   })
-                    // }
+                    value={value.tenth_percent}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        tenth_percent: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="grid grid-cols-2  gap-10">
+                  <h1 className="font-bold text-lg bg-gray-700 shadow-xl text-white px-2 py-1 rounded-lg">
+                    12th % :
+                  </h1>
+
+                  <input
+                    required
+                    placeholder="12 %"
+                    className="border-2 px-2 py-1 text-sm"
+                    type="number"
+                    value={value.twelth_percent}
+                    onChange={(e) =>
+                      setValue({
+                        ...value,
+                        twelth_percent: e.target.value,
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -455,25 +535,35 @@ const Body = () => {
                 Submit
               </button>
               <button
-                // onClick={() => {
-                //   setValue({
-                //     name: "",
-                //     dob: "",
-                //     email: "",
-                //     department: "",
-                //     contactNumber: "",
-                //     avatar: "",
-                //     batch: "",
-                //     gender: "",
-                //     year: "",
-                //     fatherName: "",
-                //     motherName: "",
-                //     section: "",
-                //     fatherContactNumber: "",
-                //     motherContactNumber: "",
-                //   });
-                //   setError({});
-                // }}
+                onClick={() => {
+                  setValue({
+                    name: "",
+                    dob: "",
+                    father_name: "",
+                    mother_name: "",
+                    email: "",
+                    batch: "",
+                    year: "",
+                    department: "",
+                    gender: "",
+                    studnt_mobile: "",
+                    section: "",
+                    avatar: "",
+                    father_occupation: "",
+                    father_mobile: "",
+                    mother_mobile: "",
+                    address: "",
+                    permanent_address: "",
+                    pincode: "",
+                    category: "",
+                    aadhar_no: "",
+                    pan_no: "",
+                    nationality: "",
+                    blood_group: "",
+                    tenth_percent: "",
+                    twelth_percent: "",
+                  });
+                }}
                 className="bg-blue-500 w-24 h-8 rounded-md text-white hover:scale-105 hover:bg-blue-700 transition-all duration-200"
                 type="button"
               >

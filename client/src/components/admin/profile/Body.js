@@ -1,8 +1,10 @@
 import React from "react";
 import Data from "./Data";
 import { FaUserTie, FaRegEdit } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Body = () => {
+  const userProfileData = useSelector((state) => state.adminUser);
   return (
     <div className="flex-[0.8] mt-3">
       <div className="space-y-5">
@@ -20,24 +22,30 @@ const Body = () => {
           </div>
         </div>
         <div className="w-[98%] bg-white relative rounded-xl ">
-          <div className="absolute left-[50%] top-[-25%]">
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              alt=""
-              className="w-20 h-20"
-            />
-          </div>
           <div className="flex py-10 ml-10 space-x-40">
             <div className="flex flex-col space-y-10">
-              <Data label="Name" value="Atul Joshi" />
-              <Data label="Email" value="joshiatul26@gmail.com" />
-              <Data label="Username" value="username" />
-              <Data label="Department" value="Super Admin" />
+              <Data label="Name" value={userProfileData.name} />
+              <Data label="Email" value={userProfileData.email} />
+              <Data label="Username" value={userProfileData.username} />
+              <Data label="Department" value={userProfileData.department} />
             </div>
             <div className="flex flex-col space-y-10 ">
-              <Data label="DOB" value="26-013-1991" />
-              <Data label="Joining Year" value="2023" />
-              <Data label="Contact Number" value="8823901748" />
+              <Data label="DOB" value={userProfileData.dob} />
+              <Data label="Joining Year" value={userProfileData.joiningYear} />
+              <Data
+                label="Contact Number"
+                value={userProfileData.contactNumber}
+              />
+              <Data
+                label="Avatar"
+                value={
+                  <img
+                    src={userProfileData.avatar}
+                    alt=""
+                    className="w-20 h-20"
+                  />
+                }
+              />
             </div>
           </div>
         </div>

@@ -6,6 +6,11 @@ const initialState = {
   email: "",
   avatar: "",
   token: "",
+  username: "",
+  department: "",
+  dob: "",
+  joiningYear: "",
+  contactNumber: "",
   isUserLogin: false,
 };
 
@@ -18,6 +23,11 @@ const adminUserSlice = createSlice({
       state.name = action.payload.userExist.name;
       state.email = action.payload.userExist.email;
       state.avatar = action.payload.userExist.avatar;
+      state.username = action.payload.userExist.username;
+      state.department = action.payload.userExist.department;
+      state.dob = action.payload.userExist.dob;
+      state.joiningYear = action.payload.userExist.joiningYear;
+      state.contactNumber = action.payload.userExist.contactNumber;
       state.token = action.payload.jwtToken;
       state.isUserLogin = true;
     },
@@ -27,6 +37,11 @@ const adminUserSlice = createSlice({
       state.email = "";
       state.avatar = "";
       state.token = "";
+      state.username = "";
+      state.department = "";
+      state.dob = "";
+      state.joiningYear = "";
+      state.contactNumber = "";
     },
   },
 });
