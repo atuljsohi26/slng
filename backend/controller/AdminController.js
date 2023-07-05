@@ -1,6 +1,7 @@
 const { createUserName, hashPassword } = require("../utils/helpers");
 const { MESSAGE } = require("../utils/site_config");
 const AdminModel = require("./../model/admin");
+const StudentModel = require("./../model/student");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -92,6 +93,92 @@ module.exports.login = async (req, res) => {
       status: true,
       message: MESSAGE.LOGIN_SUCCESS,
       response: { userExist, jwtToken: token },
+    });
+  } catch (err) {
+    console.log("error **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};
+
+module.exports.addStudent = async (req, res) => {
+  try {
+    const {
+      name,
+      dob,
+      father_name,
+      mother_name,
+      email,
+      batch,
+      year,
+      department,
+      gender,
+      student_mobile,
+      section,
+      avatar,
+      father_occupation,
+      father_mobile,
+      mother_mobile,
+      address,
+      permanent_address,
+      pincode,
+      category,
+      aadhar_no,
+      pan_no,
+      nationality,
+      blood_group,
+      tenth_percent,
+      twelth_percent,
+    } = req.body;
+    const checkEmailExist = await StudentModel.findOne({ email });
+    if (checkEmailExist) {
+      res.status(400).json({
+        success: false,
+        message: MESSAGE.EMAIL_ALREADY_TAKEN,
+      });
+    }
+    const students = await StudentModel.find({ department });
+    const username = await createUserName(students.length, "student");
+    const hashedPassword = await hashPassword(dob);
+
+    const newStudent = await new StudentModel({
+      password: hashedPassword,
+      username,
+      passwordUpdated: false,
+      name,
+      dob,
+      father_name,
+      mother_name,
+      email,
+      batch,
+      year,
+      department,
+      gender,
+      student_mobile,
+      section,
+      avatar,
+      father_occupation,
+      father_mobile,
+      mother_mobile,
+      address,
+      permanent_address,
+      pincode,
+      category,
+      aadhar_no,
+      pan_no,
+      nationality,
+      blood_group,
+      tenth_percent,
+      twelth_percent,
+    });
+    await newStudent.save();
+    //console.log("newAdmin **", newAdmin);
+    return res.status(200).json({
+      success: true,
+      message: MESSAGE.Student_ADD_SUCCESSFULLY,
+      response: newStudent,
     });
   } catch (err) {
     console.log("error **", err);

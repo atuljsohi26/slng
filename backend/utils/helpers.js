@@ -13,6 +13,8 @@ module.exports.createUserName = async (dataLength, type) => {
   let components = "";
   if (type == "admin") {
     components = ["ADM", date.getFullYear(), helper];
+  } else if (type == "student") {
+    components = ["STU", date.getFullYear(), helper];
   }
   const username = components.join("");
   return username;
