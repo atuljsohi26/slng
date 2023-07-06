@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { imageToBase64 } from "../../../utils/helper";
+import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Body = () => {
+  const loginToken = useSelector((state) => state.adminUser);
   const [value, setValue] = useState({
     name: "",
     dob: "",
@@ -42,6 +45,52 @@ const Body = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("studentValues **", value);
+    const submitStudentData = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/admin/addStudent`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: loginToken.token,
+        },
+        body: JSON.stringify(value),
+      }
+    );
+    const studentResult = await submitStudentData.json();
+    if (studentResult.success) {
+      // navigate("dashboard");
+      // dispatch(loginUserDetails(studentResult.response));
+      toast.success(studentResult.message);
+      setValue({
+        name: "",
+        dob: "",
+        father_name: "",
+        mother_name: "",
+        email: "",
+        batch: "",
+        year: "",
+        department: "",
+        gender: "",
+        studnt_mobile: "",
+        section: "",
+        avatar: "",
+        father_occupation: "",
+        father_mobile: "",
+        mother_mobile: "",
+        address: "",
+        permanent_address: "",
+        pincode: "",
+        category: "",
+        aadhar_no: "",
+        pan_no: "",
+        nationality: "",
+        blood_group: "",
+        tenth_percent: "",
+        twelth_percent: "",
+      });
+    } else {
+      toast.error(studentResult.message);
+    }
   };
 
   return (
