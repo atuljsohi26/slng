@@ -188,3 +188,27 @@ module.exports.addStudent = async (req, res) => {
     });
   }
 };
+
+module.exports.getAllStudents = async (req, res) => {
+  try {
+    const getAllStudent = await StudentModel.find();
+    if (getAllStudent) {
+      res.status(200).json({
+        status: true,
+        message: MESSAGE.STUDENT_LIST_FOUND,
+        response: { getAllStudent },
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: MESSAGE.STUDENT_LIST_NOT_FOUND,
+      });
+    }
+  } catch (err) {
+    console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};

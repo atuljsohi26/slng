@@ -6,4 +6,6 @@ module.exports.MESSAGE = {
   PASSWORD_NOT_MATCHED: "Invalid password",
   LOGIN_SUCCESS: "Welcome User!",
   Student_ADD_SUCCESSFULLY: "Student has been added successfully.",
+  STUDENT_LIST_FOUND: "Student list found successfully.",
+  STUDENT_LIST_NOT_FOUND: "Student list not found.",
 };
