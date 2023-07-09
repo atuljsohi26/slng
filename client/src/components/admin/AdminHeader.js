@@ -25,11 +25,7 @@ const AdminHeader = () => {
       </div>
       <h1 className="font-semibold text-black">Welcome</h1>
       <div className="flex items-center space-x-3">
-        <img
-          src={userData.avatar}
-          alt="user_img"
-          className="border-blue-600 border-2 w-14 h-14"
-        />
+        <img src={userData.avatar} alt="avatar" className="w-20 rounded-full" />
         <h1>{userData.name}</h1>
         <MdLogout
           onClick={logout}

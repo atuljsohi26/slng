@@ -4,10 +4,10 @@ import {
   FaHome,
   FaUserTie,
   FaPlusCircle,
-  FaTrashAlt,
-  FaTools,
+  // FaTrashAlt,
+  // FaTools,
   FaUserAstronaut,
-  FaBook,
+  // FaBook,
 } from "react-icons/fa";
 
 const AdminSidebar = () => {
@@ -30,7 +30,7 @@ const AdminSidebar = () => {
             <h1 className="font-normal">Profile</h1>
           </NavLink>
         </div>
-        <div className="">
+        {/* <div className="">
           <NavLink
             to="/admin/createNotice"
             className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
@@ -38,8 +38,8 @@ const AdminSidebar = () => {
             <FaPlusCircle className="" />
             <h1 className="font-normal">Create Notice</h1>
           </NavLink>
-        </div>
-        <div className="">
+        </div> */}
+        {/* <div className="">
           <NavLink
             to="/admin/addadmin"
             className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
@@ -54,8 +54,8 @@ const AdminSidebar = () => {
             <FaTrashAlt className="" />
             <h1 className="font-normal">Delete Admin</h1>
           </NavLink>
-        </div>
-        <div className="">
+        </div> */}
+        {/* <div className="">
           <NavLink
             to="/admin/adddepartment"
             className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
@@ -70,8 +70,8 @@ const AdminSidebar = () => {
             <FaTrashAlt className="" />
             <h1 className="font-normal">Delete Department</h1>
           </NavLink>
-        </div>
-        <div className="">
+        </div> */}
+        {/* <div className="">
           <NavLink
             to="/admin/allfaculty"
             className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
@@ -94,7 +94,7 @@ const AdminSidebar = () => {
             <FaTrashAlt className="" />
             <h1 className="font-normal">Delete Faculty</h1>
           </NavLink>
-        </div>
+        </div> */}
         <div className="">
           <NavLink
             to="/admin/allstudent"
@@ -111,15 +111,8 @@ const AdminSidebar = () => {
             <FaPlusCircle className="" />
             <h1 className="font-normal">Add Students</h1>
           </NavLink>
-          <NavLink
-            to="/admin/deletestudent"
-            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
-          >
-            <FaTrashAlt className="" />
-            <h1 className="font-normal">Delete Student</h1>
-          </NavLink>
         </div>
-        <div className="">
+        {/* <div className="">
           <NavLink
             to="/admin/allsubject"
             className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
@@ -135,14 +128,7 @@ const AdminSidebar = () => {
             <FaPlusCircle className="" />
             <h1 className="font-normal">Add Subject</h1>
           </NavLink>
-          <NavLink
-            to="/admin/deletesubject"
-            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
-          >
-            <FaTrashAlt className="" />
-            <h1 className="font-normal">Delete Subject</h1>
-          </NavLink>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -191,12 +191,13 @@ module.exports.addStudent = async (req, res) => {
 
 module.exports.getAllStudents = async (req, res) => {
   try {
-    const getAllStudent = await StudentModel.find();
+    const getAllStudent = await StudentModel.find().sort({ _id: "desc" });
+
     if (getAllStudent) {
       res.status(200).json({
         status: true,
         message: MESSAGE.STUDENT_LIST_FOUND,
-        response: { getAllStudent },
+        response: getAllStudent,
       });
     } else {
       res.status(400).json({
