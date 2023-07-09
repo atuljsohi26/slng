@@ -7,7 +7,7 @@ const Body = () => {
 
   useEffect(() => {
     getAllStudents();
-  });
+  }, []);
   const getAllStudents = async () => {
     const fetchStudent = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/admin/getAllStudent`,
