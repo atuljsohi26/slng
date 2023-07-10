@@ -16,7 +16,7 @@ const Body = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const submitStudentData = await fetch(
+    const submitData = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/admin/addDepartment`,
       {
         method: "POST",
@@ -27,17 +27,17 @@ const Body = () => {
         body: JSON.stringify(value),
       }
     );
-    const studentResult = await submitStudentData.json();
-    if (studentResult.success) {
-      toast.success(studentResult.message);
+    const departmentResult = await submitData.json();
+    if (departmentResult.success) {
+      toast.success(departmentResult.message);
       setLoading(false);
       setValue({
         name: "",
       });
-      navigate("/admin/allstudent");
+      navigate("/admin/getdepartment");
     } else {
       setLoading(false);
-      toast.error(studentResult.message);
+      toast.error(departmentResult.message);
     }
   };
 

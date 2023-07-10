@@ -242,3 +242,30 @@ module.exports.addDepartment = async (req, res) => {
     });
   }
 };
+
+module.exports.getAllDepartment = async (req, res) => {
+  try {
+    const getAllDepartments = await DepartmentModel.find().sort({
+      _id: "desc",
+    });
+
+    if (getAllDepartments) {
+      res.status(200).json({
+        status: true,
+        message: MESSAGE.DEPARTMENT_LIST_FOUND,
+        response: getAllDepartments,
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: MESSAGE.DEPARTMENT_LIST_NOT_FOUND,
+      });
+    }
+  } catch (err) {
+    console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};

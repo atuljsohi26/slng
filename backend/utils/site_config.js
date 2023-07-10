@@ -10,4 +10,6 @@ module.exports.MESSAGE = {
   STUDENT_LIST_NOT_FOUND: "Student list not found.",
   DEPARTMENT_EXIST: "Department already exists",
   DEPARTMENT_ADD_SUCCESSFULLY: "Department has been added successfully.",
+  DEPARTMENT_LIST_FOUND: "Department list found successfully.",
+  DEPARTMENT_LIST_NOT_FOUND: "Department list not found.",
 };

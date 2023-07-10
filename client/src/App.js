@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import AddDepartment from "./components/admin/addDepartment/AddDepartment";
+import AllDepartment from "./components/admin/getDepartment/AllDepartment";
 
 function App() {
   //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
@@ -50,6 +51,10 @@ function App() {
             {
               path: "adddepartment",
               element: <AddDepartment />,
+            },
+            {
+              path: "getdepartment",
+              element: <AllDepartment />,
             },
           ],
         },
