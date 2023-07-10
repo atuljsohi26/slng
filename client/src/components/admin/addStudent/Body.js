@@ -3,9 +3,13 @@ import { FaPlusCircle } from "react-icons/fa";
 import { imageToBase64 } from "../../../utils/helper";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import Spinner from "../../../utils/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Body = () => {
+  const navigate = useNavigate();
   const loginToken = useSelector((state) => state.adminUser);
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState({
     name: "",
     dob: "",
@@ -44,7 +48,7 @@ const Body = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("studentValues **", value);
+    setLoading(true);
     const submitStudentData = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/admin/addStudent`,
       {
@@ -58,9 +62,8 @@ const Body = () => {
     );
     const studentResult = await submitStudentData.json();
     if (studentResult.success) {
-      // navigate("dashboard");
-      // dispatch(loginUserDetails(studentResult.response));
       toast.success(studentResult.message);
+      setLoading(false);
       setValue({
         name: "",
         dob: "",
@@ -88,7 +91,9 @@ const Body = () => {
         tenth_percent: "",
         twelth_percent: "",
       });
+      navigate("/admin/allstudent");
     } else {
+      setLoading(false);
       toast.error(studentResult.message);
     }
   };
@@ -100,6 +105,15 @@ const Body = () => {
           <FaPlusCircle />
           <h1>Add Student</h1>
         </div>
+        {loading && (
+          <Spinner
+            message="Loading"
+            height={50}
+            width={150}
+            color="#111111"
+            messageColor="blue"
+          />
+        )}
         <div className=" mr-10 bg-white flex flex-col rounded-xl ">
           <form
             className={`flex flex-col mb-6 scrollbar-thin scrollbar-track-white scrollbar-thumb-black overflow-y-scroll h-[40rem]`}
