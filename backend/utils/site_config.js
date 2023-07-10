@@ -8,4 +8,6 @@ module.exports.MESSAGE = {
   Student_ADD_SUCCESSFULLY: "Student has been added successfully.",
   STUDENT_LIST_FOUND: "Student list found successfully.",
   STUDENT_LIST_NOT_FOUND: "Student list not found.",
+  DEPARTMENT_EXIST: "Department already exists",
+  DEPARTMENT_ADD_SUCCESSFULLY: "Department has been added successfully.",
 };

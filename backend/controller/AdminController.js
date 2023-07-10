@@ -1,9 +1,11 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 const { createUserName, hashPassword } = require("../utils/helpers");
 const { MESSAGE } = require("../utils/site_config");
 const AdminModel = require("./../model/admin");
 const StudentModel = require("./../model/student");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const DepartmentModel = require("./../model/department");
 
 module.exports.addAdmin = async (req, res) => {
   try {
@@ -207,6 +209,33 @@ module.exports.getAllStudents = async (req, res) => {
     }
   } catch (err) {
     console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};
+
+module.exports.addDepartment = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const checkDepartmentExist = await DepartmentModel.findOne({ name });
+    if (checkDepartmentExist) {
+      res.status(400).json({
+        success: false,
+        message: MESSAGE.DEPARTMENT_EXIST,
+      });
+    }
+    const newDepartment = await new DepartmentModel({
+      name,
+    });
+    await newDepartment.save();
+    return res.status(200).json({
+      success: true,
+      message: MESSAGE.DEPARTMENT_ADD_SUCCESSFULLY,
+    });
+  } catch (err) {
+    console.log("error **", err);
     res.status(500).json({
       success: false,
       message: MESSAGE.SOMETHING_WENT_WRONG,

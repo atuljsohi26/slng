@@ -17,7 +17,7 @@ const Body = () => {
     e.preventDefault();
     setLoading(true);
     const submitStudentData = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/admin/addStudent`,
+      `${process.env.REACT_APP_SERVER_URL}/admin/addDepartment`,
       {
         method: "POST",
         headers: {

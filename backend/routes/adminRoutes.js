@@ -4,6 +4,7 @@ const {
   login,
   addStudent,
   getAllStudents,
+  addDepartment,
 } = require("../controller/AdminController");
 const { auth } = require("../middleware/auth");
 
@@ -13,5 +14,6 @@ routes.post("/add-admin", addAdmin);
 routes.post("/login", login);
 routes.post("/addStudent", auth, addStudent);
 routes.get("/getAllStudent", auth, getAllStudents);
+routes.post("/addDepartment", auth, addDepartment);
 
 module.exports = routes;
