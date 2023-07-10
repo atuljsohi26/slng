@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaEye, FaTrash, FaUserAstronaut } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import Spinner from "./../../../utils/Spinner";
 const Body = () => {
   const getLoginToken = useSelector((state) => state.adminUser);
   const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAllStudents();
   }, []);
   const getAllStudents = async () => {
+    setLoading(true);
     const fetchStudent = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/admin/getAllStudent`,
       {
@@ -21,7 +25,12 @@ const Body = () => {
     );
     const fetchStudentResult = await fetchStudent.json();
     if (fetchStudentResult.status) {
+      setLoading(false);
       setStudents(fetchStudentResult.response);
+      toast.success(fetchStudentResult.message);
+    } else {
+      setLoading(false);
+      toast.error(fetchStudentResult.message);
     }
   };
   return (
@@ -31,6 +40,15 @@ const Body = () => {
           <FaUserAstronaut />
           <h1>All Students</h1>
         </div>
+        {loading && (
+          <Spinner
+            message="Loading"
+            height={50}
+            width={150}
+            color="#111111"
+            messageColor="blue"
+          />
+        )}
         <div className=" mr-10 bg-white grid grid-cols-4 rounded-xl pt-6 pl-6 h-[29.5rem]">
           <form className="flex flex-row items-center">
             <div className="flex flex-col">

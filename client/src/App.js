@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
@@ -14,6 +14,7 @@ import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
+  //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
   const appRouter = createBrowserRouter([
     {
       path: "/",
