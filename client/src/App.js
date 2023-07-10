@@ -1,4 +1,4 @@
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
@@ -12,6 +12,7 @@ import AllStudent from "./components/admin/getStudent/AllStudent";
 import { Toaster } from "react-hot-toast";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import AddDepartment from "./components/admin/addDepartment/AddDepartment";
 
 function App() {
   //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
@@ -45,6 +46,10 @@ function App() {
             {
               path: "allstudent",
               element: <AllStudent />,
+            },
+            {
+              path: "adddepartment",
+              element: <AddDepartment />,
             },
           ],
         },
