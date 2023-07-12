@@ -177,6 +177,14 @@ module.exports.addStudent = async (req, res) => {
       twelth_percent,
     });
     await newStudent.save();
+    const subjects = await SubjectModel.find({ department, year });
+    console.log("subjects **", subjects);
+    if (subjects.length !== 0) {
+      for (var i = 0; i < subjects.length; i++) {
+        newStudent.subjects.push(subjects[i]._id);
+      }
+    }
+    await newStudent.save();
     //console.log("newAdmin **", newAdmin);
     return res.status(200).json({
       success: true,
@@ -288,6 +296,13 @@ module.exports.addSubject = async (req, res) => {
       totalLectures,
     });
     await newSubject.save();
+    const students = await StudentModel.find({ department, year });
+    if (students.length !== 0) {
+      for (var i = 0; i < students.length; i++) {
+        students[i].subjects.push(newSubject._id);
+        await students[i].save();
+      }
+    }
     return res.status(500).json({
       success: true,
       message: MESSAGE.SUBJECT_ADDED_SUCCESSFULLY,
