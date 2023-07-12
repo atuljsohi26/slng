@@ -6,6 +6,7 @@ const { MESSAGE } = require("../utils/site_config");
 const AdminModel = require("./../model/admin");
 const StudentModel = require("./../model/student");
 const DepartmentModel = require("./../model/department");
+const SubjectModel = require("./../model/subject");
 
 module.exports.addAdmin = async (req, res) => {
   try {
@@ -264,6 +265,36 @@ module.exports.getAllDepartment = async (req, res) => {
   } catch (err) {
     console.log("err **", err);
     res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};
+
+module.exports.addSubject = async (req, res) => {
+  try {
+    const { name, year, department, totalLectures } = req.body;
+    const checkSubjectExist = await SubjectModel.findOne({ name });
+    if (checkSubjectExist) {
+      return res.status(400).json({
+        success: false,
+        message: MESSAGE.SUBJECT_ALREADY_EXIST,
+      });
+    }
+    const newSubject = await new SubjectModel({
+      name,
+      year,
+      department,
+      totalLectures,
+    });
+    await newSubject.save();
+    return res.status(500).json({
+      success: true,
+      message: MESSAGE.SUBJECT_ADDED_SUCCESSFULLY,
+    });
+  } catch (err) {
+    console.log("error **", err);
+    return res.status(500).json({
       success: false,
       message: MESSAGE.SOMETHING_WENT_WRONG,
     });
