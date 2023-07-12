@@ -232,10 +232,10 @@ const Body = () => {
                     }
                   >
                     <option value="">None</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
                   </select>
                 </div>
                 <div className="grid grid-cols-2  gap-10">
@@ -258,16 +258,16 @@ const Body = () => {
                         {dp.department}
                       </option>
                     ))} */}
-                    <option key="d1" value="department 1">
+                    <option key="d1" value="department_1">
                       Department 1
                     </option>
-                    <option key="d2" value="department 2">
+                    <option key="d2" value="department_2">
                       Department 2
                     </option>
-                    <option key="d3" value="department 3">
+                    <option key="d3" value="department_3">
                       Department 3
                     </option>
-                    <option key="d4" value="department 4">
+                    <option key="d4" value="department_4">
                       Department 4
                     </option>
                   </select>
