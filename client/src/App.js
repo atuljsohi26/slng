@@ -14,6 +14,7 @@ import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import AddDepartment from "./components/admin/addDepartment/AddDepartment";
 import AllDepartment from "./components/admin/getDepartment/AllDepartment";
+import AddSubject from "./components/admin/addSubject/AddSubject";
 
 function App() {
   //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
@@ -55,6 +56,10 @@ function App() {
             {
               path: "getdepartment",
               element: <AllDepartment />,
+            },
+            {
+              path: "addSubject",
+              element: <AddSubject />,
             },
           ],
         },

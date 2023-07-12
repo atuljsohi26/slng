@@ -8,6 +8,7 @@ import {
   // FaTools,
   FaUserAstronaut,
   FaEye,
+  FaBook,
   // FaBook,
 } from "react-icons/fa";
 
@@ -62,6 +63,23 @@ const AdminSidebar = () => {
           >
             <FaPlusCircle className="" />
             <h1 className="font-normal">Add Department</h1>
+          </NavLink>
+        </div>
+        <div className="">
+          <NavLink
+            to="/admin/allsubject"
+            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
+          >
+            <FaBook className="" />
+            <h1 className="font-normal">Subjects</h1>
+          </NavLink>
+
+          <NavLink
+            to="/admin/addsubject"
+            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
+          >
+            <FaPlusCircle className="" />
+            <h1 className="font-normal">Add Subject</h1>
           </NavLink>
         </div>
         {/* <div className="">
