@@ -315,3 +315,30 @@ module.exports.addSubject = async (req, res) => {
     });
   }
 };
+
+module.exports.getAllSubject = async (req, res) => {
+  try {
+    const getAllSubject = await SubjectModel.find().sort({
+      _id: "desc",
+    });
+
+    if (getAllSubject) {
+      res.status(200).json({
+        status: true,
+        message: MESSAGE.SUBJECT_LIST_FOUND,
+        response: getAllSubject,
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: MESSAGE.SUBJECT_LIST_NOT_FOUND,
+      });
+    }
+  } catch (err) {
+    console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};

@@ -14,4 +14,6 @@ module.exports.MESSAGE = {
   DEPARTMENT_LIST_NOT_FOUND: "Department list not found.",
   SUBJECT_ALREADY_EXIST: "Subject already exist.",
   SUBJECT_ADDED_SUCCESSFULLY: "Subject added successfully.",
+  SUBJECT_LIST_FOUND: "Subject list found successfully.",
+  SUBJECT_LIST_NOT_FOUND: "Subject list not found.",
 };
