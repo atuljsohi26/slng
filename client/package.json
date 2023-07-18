@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://atuljsohi26.github.io/slng/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
