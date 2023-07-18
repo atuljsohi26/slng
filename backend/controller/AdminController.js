@@ -7,6 +7,7 @@ const AdminModel = require("./../model/admin");
 const StudentModel = require("./../model/student");
 const DepartmentModel = require("./../model/department");
 const SubjectModel = require("./../model/subject");
+const FeeMasterModel = require("./../model/feemaster");
 
 module.exports.addAdmin = async (req, res) => {
   try {
@@ -337,6 +338,38 @@ module.exports.getAllSubject = async (req, res) => {
   } catch (err) {
     console.log("err **", err);
     res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};
+
+module.exports.addFeeMaster = async (req, res) => {
+  try {
+    const {
+      year,
+      department,
+      course_fee,
+      form_fee,
+      uniform_fee,
+      caution_money,
+    } = req.body;
+    const newFeeMaster = await new FeeMasterModel({
+      year,
+      department,
+      course_fee,
+      form_fee,
+      uniform_fee,
+      caution_money,
+    });
+    await newFeeMaster.save();
+    return res.status(500).json({
+      success: true,
+      message: MESSAGE.FEE_MASTER_ADDED_SUCCESSFULLY,
+    });
+  } catch (err) {
+    console.log("error **", err);
+    return res.status(500).json({
       success: false,
       message: MESSAGE.SOMETHING_WENT_WRONG,
     });

@@ -8,6 +8,7 @@ const {
   getAllDepartment,
   addSubject,
   getAllSubject,
+  addFeeMaster,
 } = require("../controller/AdminController");
 const { auth } = require("../middleware/auth");
 
@@ -21,5 +22,6 @@ routes.post("/addDepartment", auth, addDepartment);
 routes.get("/getAllDepartment", auth, getAllDepartment);
 routes.post("/addSubject", auth, addSubject);
 routes.get("/getAllSubject", auth, getAllSubject);
+routes.post("/addFeeMaster", auth, addFeeMaster);
 
 module.exports = routes;
