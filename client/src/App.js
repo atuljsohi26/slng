@@ -16,6 +16,7 @@ import AddDepartment from "./components/admin/addDepartment/AddDepartment";
 import AllDepartment from "./components/admin/getDepartment/AllDepartment";
 import AddSubject from "./components/admin/addSubject/AddSubject";
 import AllSubject from "./components/admin/getSubject/AllSubject";
+import AddFeeMaster from "./components/admin/addFeeMaster/AddFeeMaster";
 
 function App() {
   //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
@@ -65,6 +66,10 @@ function App() {
             {
               path: "allsubject",
               element: <AllSubject />,
+            },
+            {
+              path: "addfeemaster",
+              element: <AddFeeMaster />,
             },
           ],
         },

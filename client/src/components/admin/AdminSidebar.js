@@ -82,6 +82,23 @@ const AdminSidebar = () => {
             <h1 className="font-normal">Add Subject</h1>
           </NavLink>
         </div>
+        <div className="">
+          <NavLink
+            to="/admin/feemaster"
+            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
+          >
+            <FaBook className="" />
+            <h1 className="font-normal">Fee Master</h1>
+          </NavLink>
+
+          <NavLink
+            to="/admin/addfeemaster"
+            className="flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize hover:bg-gray-200 py-2 my-1"
+          >
+            <FaPlusCircle className="" />
+            <h1 className="font-normal">Add Fee Master</h1>
+          </NavLink>
+        </div>
         {/* <div className="">
           <NavLink
             to="/admin/createNotice"
