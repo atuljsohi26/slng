@@ -375,3 +375,30 @@ module.exports.addFeeMaster = async (req, res) => {
     });
   }
 };
+
+module.exports.getFeeMaster = async (req, res) => {
+  try {
+    const getFeeMaster = await FeeMasterModel.find().sort({
+      _id: "desc",
+    });
+
+    if (getFeeMaster) {
+      res.status(200).json({
+        status: true,
+        message: MESSAGE.FEE_LIST_FOUND,
+        response: getFeeMaster,
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: MESSAGE.LIST_NOT_FOUND,
+      });
+    }
+  } catch (err) {
+    console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};

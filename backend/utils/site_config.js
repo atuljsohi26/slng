@@ -17,4 +17,6 @@ module.exports.MESSAGE = {
   SUBJECT_LIST_FOUND: "Subject list found successfully.",
   SUBJECT_LIST_NOT_FOUND: "Subject list not found.",
   FEE_MASTER_ADDED_SUCCESSFULLY: "Fee master added successfully.",
+  FEE_LIST_FOUND: "Fee list found successfully.",
+  LIST_NOT_FOUND: "List not found.",
 };

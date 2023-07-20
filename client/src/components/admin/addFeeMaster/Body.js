@@ -3,10 +3,10 @@ import { FaPlusCircle } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Spinner from "../../../utils/Spinner";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Body = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const loginToken = useSelector((state) => state.adminUser);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState({

@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { FaEdit, FaEye, FaTrash, FaUserAstronaut } from "react-icons/fa";
+import { FaEdit, FaEye, FaServer, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import Spinner from "./../../../utils/Spinner";
-import { Link } from "react-router-dom";
+import Spinner from "../../../utils/Spinner";
 const Body = () => {
   const getLoginToken = useSelector((state) => state.adminUser);
-  const [students, setStudents] = useState([]);
+  const [feeMaster, setFeeMaster] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllStudents();
+    getAllFeeMaster();
   }, []);
-  const getAllStudents = async () => {
+  const getAllFeeMaster = async () => {
     setLoading(true);
-    const fetchStudent = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/admin/getAllStudent`,
+    const fetchFeeMaster = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/admin/getFeeMasterList`,
       {
         method: "GET",
         headers: {
@@ -24,22 +23,22 @@ const Body = () => {
         },
       }
     );
-    const fetchStudentResult = await fetchStudent.json();
-    if (fetchStudentResult.status) {
+    const fetchFeeMasterResult = await fetchFeeMaster.json();
+    if (fetchFeeMasterResult.status) {
       setLoading(false);
-      setStudents(fetchStudentResult.response);
-      toast.success(fetchStudentResult.message);
+      setFeeMaster(fetchFeeMasterResult.response);
+      toast.success(fetchFeeMasterResult.message);
     } else {
       setLoading(false);
-      toast.error(fetchStudentResult.message);
+      toast.error(fetchFeeMasterResult.message);
     }
   };
   return (
     <div className="flex-[0.8] mt-3">
       <div className="space-y-5">
         <div className="flex text-gray-400 items-center space-x-2">
-          <FaUserAstronaut />
-          <h1>All Students</h1>
+          <FaServer />
+          <h1>Fee Master</h1>
         </div>
         {loading && (
           <Spinner
@@ -52,16 +51,6 @@ const Body = () => {
         )}
         <div className=" mr-10 bg-white grid grid-cols-4 rounded-xl pt-6 pl-6 h-[29.5rem]">
           <form className="flex flex-row items-center">
-            <div className="flex flex-col">
-              <label htmlFor="username" className="mb-1">
-                Username
-              </label>
-              <input
-                className="h-9 px-2 border border-gray-300 rounded-md"
-                type="text"
-                placeholder="Username"
-              />
-            </div>
             <div className="flex flex-col ml-4">
               <label htmlFor="department" className="mb-1">
                 Department
@@ -125,52 +114,49 @@ const Body = () => {
                     #
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    Name
+                    Year
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    Email
+                    Department
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    Username
+                    Course Fee
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    Section
+                    Form Fee
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    Batch
+                    Uniform Fee
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Caution Money
                   </th>
                   <th scope="col" className="px-6 py-4"></th>
                 </tr>
               </thead>
               <tbody>
-                {students.map((student, index) => (
+                {feeMaster.map((feeMaster, index) => (
                   <tr key={index} className="border-b dark:border-neutral-500">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">
                       {++index}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {student.name}
+                      {feeMaster.year}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {student.email}
+                      {feeMaster.department}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {student.username}
+                      {feeMaster.course_fee}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {student.section}
+                      {feeMaster.form_fee}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {student.batch}
+                      {feeMaster.uniform_fee}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      <Link
-                        type="button"
-                        to="/admin/studentfee"
-                        className="flex items-center justify-center font-bold bg-blue-700 h-9 px-4 rounded-md text-white hover:scale-105 hover:bg-blue-300 transition-all duration-200 ml-4"
-                      >
-                        Fee
-                      </Link>
+                      {feeMaster.caution_money}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       <div className="flex flex-row">
