@@ -166,10 +166,10 @@ const Body = () => {
                     <td className="whitespace-nowrap px-6 py-4">
                       <Link
                         type="button"
-                        to="/admin/studentfee"
+                        to={"/admin/studentfee/" + student._id}
                         className="flex items-center justify-center font-bold bg-blue-700 h-9 px-4 rounded-md text-white hover:scale-105 hover:bg-blue-300 transition-all duration-200 ml-4"
                       >
-                        Fee
+                        FEE
                       </Link>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">

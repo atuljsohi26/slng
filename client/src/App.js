@@ -18,6 +18,7 @@ import AddSubject from "./components/admin/addSubject/AddSubject";
 import AllSubject from "./components/admin/getSubject/AllSubject";
 import AddFeeMaster from "./components/admin/addFeeMaster/AddFeeMaster";
 import FeeMaster from "./components/admin/getFeeMaster/FeeMaster";
+import StudentFee from "./components/admin/studentFee/StudentFee";
 
 function App() {
   //const isUserLoggedIn = useSelector((state) => console.log("state **", state));
@@ -75,6 +76,10 @@ function App() {
             {
               path: "feemaster",
               element: <FeeMaster />,
+            },
+            {
+              path: "studentfee/:studentId",
+              element: <StudentFee />,
             },
           ],
         },
