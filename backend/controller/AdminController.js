@@ -402,3 +402,83 @@ module.exports.getFeeMaster = async (req, res) => {
     });
   }
 };
+
+module.exports.getStudentAndFeeDetails = async (req, res) => {
+  try {
+    const { studentId } = req.query;
+    const selectedStudentColumns = { _id: 1, year: 1, department: 1 };
+    const selectedSFeeColumns = {
+      _id: 1,
+      year: 1,
+      department: 1,
+      name: 1,
+      feeDetails: 1,
+    };
+    const getStudentDetail = await StudentModel.findOne(
+      { _id: studentId },
+      selectedStudentColumns
+    );
+
+    const id = getStudentDetail._id;
+    const year = parseInt(getStudentDetail.year);
+    const department = getStudentDetail.department;
+
+    const getStudentDetailsWithFeeDetails = await StudentModel.aggregate([
+      {
+        $match: {
+          _id: id,
+          year: year,
+          department: department,
+        },
+      },
+      {
+        $lookup: {
+          from: "feemasters",
+          let: {
+            year: "$year",
+            department: "$department",
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$year", "$$year"] },
+                    { $eq: ["$department", "$$department"] },
+                  ],
+                },
+              },
+            },
+          ],
+          as: "feeDetails",
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          year: 1,
+          department: 1,
+          feeDetails: 1,
+        },
+      },
+    ]);
+    if (getStudentDetailsWithFeeDetails) {
+      res.status(200).json({
+        status: true,
+        message: MESSAGE.FEE_LIST_FOUND,
+        response: getStudentDetailsWithFeeDetails[0],
+      });
+    } else {
+      res.status(404).json({
+        status: false,
+        message: MESSAGE.LIST_NOT_FOUND,
+      });
+    }
+  } catch (err) {
+    console.log("err **", err);
+    res.status(500).json({
+      success: false,
+      message: MESSAGE.SOMETHING_WENT_WRONG,
+    });
+  }
+};

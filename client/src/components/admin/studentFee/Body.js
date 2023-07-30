@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -9,9 +9,9 @@ import { useParams } from "react-router-dom";
 const Body = () => {
   //const navigate = useNavigate();
   const { studentId } = useParams();
-  console.log("studentId **", studentId);
   const loginToken = useSelector((state) => state.adminUser);
   const [loading, setLoading] = useState(false);
+  const [studentAndFeeDetails, setStudentAndFeeDetails] = useState("");
   const [value, setValue] = useState({
     year: "",
     department: "",
@@ -21,38 +21,69 @@ const Body = () => {
     caution_money: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    getStudentAndFeeDetails();
+  }, []);
+  const getStudentAndFeeDetails = async () => {
     setLoading(true);
-    const submitData = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/admin/addFeeMaster`,
+    const fetchStudentAndFeeDetails = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/admin/getStudentFeeDetails?studentId=${studentId}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "content-type": "application/json",
           Authorization: loginToken.token,
         },
-        body: JSON.stringify(value),
       }
     );
-    const subjectResult = await submitData.json();
-    console.log("subjectResult **", subjectResult);
-    if (subjectResult.success) {
-      toast.success(subjectResult.message);
+    const fetchStudentAndFeeDetailsResult =
+      await fetchStudentAndFeeDetails.json();
+    if (fetchStudentAndFeeDetailsResult.status) {
+      console.log(
+        "fetchStudentAndFeeDetailsResult **",
+        fetchStudentAndFeeDetailsResult
+      );
       setLoading(false);
-      setValue({
-        year: "",
-        department: "",
-        course_fee: "",
-        form_fee: "",
-        uniform_fee: "",
-        caution_money: "",
-      });
-      //navigate("/admin/getdepartment");
+      setStudentAndFeeDetails(fetchStudentAndFeeDetailsResult.response);
+      toast.success(fetchStudentAndFeeDetailsResult.message);
     } else {
       setLoading(false);
-      toast.error(subjectResult.message);
+      toast.error(fetchStudentAndFeeDetailsResult.message);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    // setLoading(true);
+    // const submitData = await fetch(
+    //   `${process.env.REACT_APP_SERVER_URL}/admin/getStudentFeeDetails?${studentId}`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       "content-type": "application/json",
+    //       Authorization: loginToken.token,
+    //     },
+    //     body: JSON.stringify(value),
+    //   }
+    // );
+    // const subjectResult = await submitData.json();
+    // console.log("subjectResult **", subjectResult);
+    // if (subjectResult.success) {
+    //   toast.success(subjectResult.message);
+    //   setLoading(false);
+    //   setValue({
+    //     year: "",
+    //     department: "",
+    //     course_fee: "",
+    //     form_fee: "",
+    //     uniform_fee: "",
+    //     caution_money: "",
+    //   });
+    //   //navigate("/admin/getdepartment");
+    // } else {
+    //   setLoading(false);
+    //   toast.error(subjectResult.message);
+    // }
   };
 
   return (
@@ -71,119 +102,225 @@ const Body = () => {
             messageColor="blue"
           />
         )}
-        <div className=" mr-10 bg-white flex flex-col rounded-xl ">
-          <h2 className="text-lg font-semibold m-4">Student Detail</h2>
-          <table className="min-w-full text-left text-sm font-light">
-            <thead className="border-b font-medium dark:border-neutral-500">
-              <tr>
-                <th scope="col" className="px-6 py-4">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Year
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Department
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Total Fee
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Fee Paid
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Fee Pending
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b dark:border-neutral-500">
-                <td className="whitespace-nowrap px-6 py-4">Name</td>
-                <td className="whitespace-nowrap px-6 py-4">Year</td>
-                <td className="whitespace-nowrap px-6 py-4">Department</td>
-              </tr>
-            </tbody>
-          </table>
-          <form
-            onSubmit={handleSubmit}
-            className={`flex flex-col mb-6 scrollbar-thin scrollbar-track-white scrollbar-thumb-black overflow-y-scroll`}
-          >
-            <h2 className="text-lg font-semibold m-4">Fee Detail</h2>
-            <table className="w-full border-collapse mb-4">
-              <thead>
+        <div className=" mr-10 bg-white flex flex-col rounded-xl mb-10">
+          <div className="h-[40.5rem] overflow-auto">
+            <h2 className="text-lg font-semibold m-4">Student Detail</h2>
+            <table className="min-w-full text-left text-sm font-light">
+              <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
-                  <th className="px-4 py-2 text-left border">Category</th>
-                  <th className="px-4 py-2 text-left border">Fee Amount</th>
+                  <th scope="col" className="px-6 py-4">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Year
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Department
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Course Fee
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Fee Paid
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Fee Pending
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="px-4 py-2 border">
-                    Addmission Form Fee (One Time)
+                <tr className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.name}
                   </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      className="w-full px-2 py-1 border rounded"
-                    />
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.year}
                   </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 border">Uniform Fee (One Time)</td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      className="w-full px-2 py-1 border rounded"
-                    />
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.department}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{0}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee - 0}
                   </td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-2 border">Caution Money (One Time)</td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      className="w-full px-2 py-1 border rounded"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 border">Course Fee</td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      className="w-full px-2 py-1 border rounded"
-                    />
-                  </td>
-                </tr>
-                {/* Add more fee items as needed */}
               </tbody>
             </table>
-            <div className="self-center space-x-6">
-              <button
-                className="bg-red-500 w-24 h-8 rounded-md text-white hover:scale-105 hover:bg-red-700 transition-all duration-200 "
-                type="submit"
-              >
-                Submit
-              </button>
-              <button
-                onClick={() => {
-                  setValue({
-                    year: "",
-                    department: "",
-                    course_fee: "",
-                    form_fee: "",
-                    uniform_fee: "",
-                    caution_money: "",
-                  });
-                }}
-                className="bg-blue-500 w-24 h-8 rounded-md text-white hover:scale-105 hover:bg-blue-700 transition-all duration-200"
-                type="button"
-              >
-                Clear
-              </button>
-            </div>
-          </form>
-          {/* <form
+            <form
+              onSubmit={handleSubmit}
+              className={`flex flex-col mb-6 scrollbar-thin scrollbar-track-white scrollbar-thumb-black overflow-y-scroll`}
+            >
+              <h2 className="text-lg font-semibold m-4">Fee Detail</h2>
+              <table className="w-full border-collapse mb-4">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2 text-left border">Category</th>
+                    <th className="px-4 py-2 text-left border">Fee Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="px-4 py-2 border">
+                      Addmission Form Fee (One Time)
+                    </td>
+                    <td className="px-4 py-2 border">
+                      {studentAndFeeDetails?.feeDetails?.[0]?.form_fee}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 border">Uniform Fee (One Time)</td>
+                    <td className="px-4 py-2 border">
+                      {studentAndFeeDetails?.feeDetails?.[0]?.uniform_fee}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 border">
+                      Caution Money (One Time)
+                    </td>
+                    <td className="px-4 py-2 border">
+                      {studentAndFeeDetails?.feeDetails?.[0]?.caution_money}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 border">Course Fee</td>
+                    <td className="px-4 py-2 border">
+                      <input
+                        type="text"
+                        className="w-full px-2 py-1 border rounded"
+                      />
+                    </td>
+                  </tr>
+                  {/* Add more fee items as needed */}
+                </tbody>
+              </table>
+              <div className="self-center space-x-6">
+                <button
+                  className="bg-red-500 w-24 h-8 rounded-md text-white hover:scale-105 hover:bg-red-700 transition-all duration-200 "
+                  type="submit"
+                >
+                  Submit
+                </button>
+                <button
+                  onClick={() => {
+                    setValue({
+                      year: "",
+                      department: "",
+                      course_fee: "",
+                      form_fee: "",
+                      uniform_fee: "",
+                      caution_money: "",
+                    });
+                  }}
+                  className="bg-blue-500 w-24 h-8 rounded-md text-white hover:scale-105 hover:bg-blue-700 transition-all duration-200"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </form>
+            <h2 className="text-lg font-semibold m-4">Installment Detail</h2>
+            <table className="min-w-full text-left text-sm font-light over">
+              <thead className="border-b font-medium dark:border-neutral-500">
+                <tr>
+                  <th scope="col" className="px-6 py-4">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Year
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Department
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Course Fee
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Fee Paid
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Fee Pending
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.name}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.year}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.department}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{0}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee - 0}
+                  </td>
+                </tr>
+                <tr className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.name}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.year}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.department}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{0}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee - 0}
+                  </td>
+                </tr>
+                <tr className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.name}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.year}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.department}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{0}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee - 0}
+                  </td>
+                </tr>
+                <tr className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.name}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.year}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.department}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">{0}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {studentAndFeeDetails?.feeDetails?.[0]?.course_fee - 0}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <form
             className={`flex flex-col mb-6 scrollbar-thin scrollbar-track-white scrollbar-thumb-black overflow-y-scroll h-[40rem]`}
             onSubmit={handleSubmit}
           >
@@ -283,6 +420,7 @@ const Body = () => {
               </button>
             </div>
           </form> */}
+          </div>
         </div>
       </div>
     </div>

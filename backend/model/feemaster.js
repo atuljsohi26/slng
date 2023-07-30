@@ -6,7 +6,7 @@ const FeeMasterSchema = mongoose.Schema({
     required: true,
   },
   year: {
-    type: String,
+    type: Number,
     required: true,
   },
   course_fee: {
